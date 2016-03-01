@@ -1,0 +1,36 @@
+/* CSS STYLE USE IN PUMA 2.0 */
+
+#task_manage_table th,
+#task_list_table th {
+	text-align: center;
+}
+
+.table_header_text_align_center th {
+	text-align: center;
+}
+
+#task_manage_table td,
+#task_list_table td {
+	vertical-align: middle;
+}
+
+
+.td_text_align_center{
+	text-align: center;
+}
+
+#task_manage_wc_total_content,
+#task_wc_similar_content{
+	width:1000px;
+	border:1px solid #ccc;
+	display:none;
+	position:absolute;
+	padding:5px;
+	text-align:left;
+	z-index:999;
+	background-color:white;
+}
+
+.table-borderless td, .table-borderless th{
+	border: 0 !important;
+}

@@ -1,0 +1,88 @@
+#YueKu {
+  width: 99 % ;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  display: none;
+}.YKTiImg {
+  width: 82px;
+  height: 32px;
+  overflow: hidden;
+  position: absolute;
+  left: -1px;
+  top: -7px;
+}#YueKu h7 {
+  background: #FFF4CB;
+  border - bottom: 1px#FFBB1A solid;
+  height: 24px;
+  overflow: hidden;
+  text - align: right;
+  padding: 0 9px 0 0;
+  line - height: 27px;
+  margin - bottom: 6px;
+}#YKTabs {
+  height: 37px;
+  overflow: hidden;
+  background - color: black repeat - x;
+  padding: 0 0 0 8px;
+}#YKTabs li {
+  width: 20 % ;
+  height: auto;
+  overflow: hidden;
+  background - color: white no - repeat;
+  text - align: center;
+  line - height: 37px;
+  color: #000;
+  float: left;
+  cursor: pointer;
+  margin: 0 3px 0 0;
+}#YKTabs li.YKTabsOn {
+  background - color: red no - repeat;
+  font - weight: bold;
+  font - size: 20px;
+  color: yellow;
+}.YKTabCon {
+  clear: both;
+}.YKTabConB01 {
+  height: 370px;
+  overflow: ;
+  clear: both;
+  padding: 0 0 0 7px;
+}.YKTabConB01ImgB {
+  width: 169px;
+  overflow: hidden;
+  float: left;
+  padding: 4px 0 0 0;
+}.YKTabConB01ImgB a {
+  color: #CF0103;
+  text - decoration: underline;
+}.YKTabConB01ImgB a: hover {
+  color: #f00;
+  text - decoration: underline;
+}.YKTabConB01ImgB a span {
+  display: block;
+  padding: 5px 0 0 0;
+  text - align: center;
+}.YKTabConB01ImgB a img {
+  border: 1px#000 solid;
+}
+ul.YKTabConB01UL01 {
+  width: 88px;
+  float: left;
+  padding: 0 0 0 10px;
+}
+ul.YKTabConB01UL01 li {
+  text - align: left;
+  padding: 3px 0 0 17px;
+  height: 17px;
+  overflow: hidden;
+  clear: both;
+}.f14 {
+  float: left;;
+  margin - left: 10px;
+  padding - left: 10px;
+}.ac - txt {
+  float: left;;
+  margin - left: 20px;
+  margin - right: 10px;
+}

@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.1.100';
+$db['default']['hostname'] = '127.0.0.1';
 $db['default']['port'] = '3307';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '123456';

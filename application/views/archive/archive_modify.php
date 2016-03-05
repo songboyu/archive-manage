@@ -21,7 +21,7 @@
                       <div class="input-inline">
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                          <input type="email" class="form-control" id='name'>
+                          <input type="text" class="form-control" id='name'>
                         </div>
                       </div>
                     </div>
@@ -158,7 +158,7 @@
                 <div class="form-actions">
                   <div class="row">
                     <div class="col-md-offset-4 col-md-6">
-                      <button type="button" class="btn green" id="submit_modify">确定</button>
+                      <button type="button" class="btn green-haze" id="submit_modify">保存</button>
                       <button type="reset" class="btn blue" id="reset">重置</button>
                       <button type="button" class="btn default" data-dismiss="modal" aria-hidden="true" id='cancle'>取消</button>
                     </div>

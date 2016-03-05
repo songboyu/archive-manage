@@ -13,10 +13,10 @@
 				</div>
 				<div class='actions'>
 					<a class='btn btn-default btn-sm' id='refresh'>
-						<i class='fa fa-pencil' ></i> 刷新列表 </a>
+						<i class='fa fa-refresh' ></i> 刷新列表 </a>
 					</a>
 					<a href='#archive_add' data-toggle='modal' class='btn btn-default btn-sm'>
-						<i class='fa fa-pencil'></i> 新增档案
+						<i class='fa fa-plus'></i> 新增档案
 					</a>
 				</div>
 			</div>
@@ -140,15 +140,12 @@
 					"render": function(data, type, full){
 						if(data==0)
 							return '<span class="label label-sm label-warning">\
-										<a style="color:white" target="_blank" href="'+ base_url + 'questionnaire/index/' + full.SID + '"> 未开始 </a>\
-									</span>';
-						else if(data==1)
-							return '<span class="label label-sm label-danger">\
-										<a style="color:white" target="_blank" href="'+ base_url + 'questionnaire/index/' + full.SID + '"> 未完成 </a>\
+									<a style="color:white" href="#paper_analysis_transaction" data-toggle="modal" onclick="paper_analysis_transaction(\''+ full.SID +'\');"> 未开始</a>\
 									</span>';
 						else if(data==2)
-							return '<span class="label label-sm label-success">\
-										<a style="color:white" target="_blank" href="'+ base_url + 'questionnaire/index/' + full.SID + '"> 已完成 </a>\
+							
+							return '<span class="label label-sm label-warning">\
+									<a style="color:white" href="#paper_analysis_transaction" data-toggle="modal" onclick="paper_analysis_transaction(\''+ full.SID +'\');"> 已完成</a>\
 									</span>';
 					}
 				},
@@ -158,9 +155,9 @@
 					'data': 'time',
 					'render': function(data, type, full) { // 返回自定义内容
 						return '\
-						<a href="#archive_modify" data-toggle="modal" onclick="modify_archive(\''+ full.SID +'\');"><i class="fa fa-pencil"></i> 修改档案</a>\
+						<a href="#archive_modify" data-toggle="modal" onclick="modify_archive(\''+ full.SID +'\');"><i class="fa fa-edit"></i> 修改档案</a>\
 						&nbsp;\
-						<a href="javascript:void(0);" onclick="delete_archive(\''+ full.SID +'\');"><i class="fa fa-pencil"></i> 删除档案</a>';
+						<a href="javascript:void(0);" onclick="delete_archive(\''+ full.SID +'\');"><i class="fa fa-times"></i> 删除档案</a>';
 					}
 				},
 				{
@@ -178,8 +175,8 @@
 		//修改perpage下拉菜单样式为扁平化
 		$("#archive_manage_table_wrapper").find(".dataTables_length select").select2(); 
 	}
-	function modify_archive(dataid) 
-	{	
+
+	function modify_archive(dataid) {	
 		var SID = dataid;
 		$.post(base_url+'archive/get_archive_by_sid', {
         	SID:SID
@@ -215,5 +212,9 @@
         function(data){
       	  reload_datatable("#archive_manage_table");
         });
+	}
+
+	function paper_analysis_transaction(){
+
 	}
 </script>

@@ -1,15 +1,15 @@
 body {
 	font-size: 12px;
 	/*background: #e5e5e5;*/
-	background:url(../images/background.jpg);
+	
 	background-repeat:no-repeat;
 	background-attachment:fixed;
 }
 .container {
-	filter:alpha(opacity=80);  
-    -moz-opacity:0.8;  
-    -khtml-opacity: 0.8;  
-    opacity: 0.8;  
+	filter:alpha(opacity=85);  
+    -moz-opacity:0.85;  
+    -khtml-opacity: 0.85;  
+    opacity: 0.85;  
 
 	background: #fff;
 	border-radius: 4px;

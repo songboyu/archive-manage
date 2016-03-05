@@ -2,16 +2,16 @@
 
 <html>
   <head>
-    <title>问卷调查表</title>
+    <title>试卷分析表</title>
     <meta charset="UTF-8" />
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<link href="<?php echo base_url('rs/css/styles.css');?>" rel='stylesheet'>
   </head>
 
-  <body>
+  <body style="background:url(../../rs/images/background_1.jpg);">
     <div class="container">
 	    <div id="message">
-	      <p>问卷调查表</p>
+	      <p>试卷分析表</p>
 	    </div>
 	 
 	    <br><br>

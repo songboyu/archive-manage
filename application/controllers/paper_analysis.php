@@ -11,7 +11,7 @@
 * @link     about:blank
 * 
 */
-class questionnaire extends CI_Controller
+class paper_analysis extends CI_Controller
 {
     /**
     *加载函数
@@ -21,7 +21,7 @@ class questionnaire extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('common_helper');//公共函数
-        $this->load->model('questionnaire_model');
+        $this->load->model('paper_analysis_model');
     }
 
     /**
@@ -30,11 +30,11 @@ class questionnaire extends CI_Controller
     */
     function index()
     {
-        $SID = $this->uri->segment(3);
-        $result['data'] = $this->questionnaire_model->get_all($SID);
-        $result['SID'] = $SID;
-        shuffle($result['data']);
-        $this->load->view('questionnaire/questionnaire', $result);
+        $pat_id = $this->uri->segment(3);
+        $result['data'] = $this->paper_analysis_model->get_all($pat_id);
+        $result['pat_id'] = $pat_id;
+        // shuffle($result['data']);
+        $this->load->view('paper_analysis/paper_analysis', $result);
     }
 
     function submit()
@@ -43,18 +43,13 @@ class questionnaire extends CI_Controller
         $update_time = date('Y-m-d H:i:s', time());
         $select = get_post('select');
 
-        $this->questionnaire_model->submit($SID, $select, $update_time);
+        $this->paper_analysis_model->submit($SID, $select, $update_time);
         echo '提交成功！';
     }
 
     function compute_score()
     {
         $SID = $this->uri->segment(3);
-        $this->questionnaire_model->compute_score($SID);
-    }
-
-    function page()
-    {
-        $this->load->view('questionnaire/page');
+        $this->paper_analysis_model->compute_score($SID);
     }
 }

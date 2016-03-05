@@ -38,6 +38,7 @@ class archive extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view('archive/archive_add');
         $this->load->view('archive/archive_modify');
+        $this->load->view('paper_analysis/paper_analysis_transaction');
         $this->load->view('archive/archive_list');
         $this->load->view('footer');
     }

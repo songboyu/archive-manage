@@ -40,34 +40,29 @@
                     <i class="icon-briefcase"></i>
                     档案管理</a>
                 </li>
-                <li>
-                    <a href="index_2.html">
-                    <i class="icon-bulb"></i>
-                    New Dashboard #1</a>
-                </li>
-                <li>
-                    <a href="index_3.html">
-                    <i class="icon-graph"></i>
-                    New Dashboard #2</a>
-                </li>
             </ul>
         </li>
         <li>
             <a href="javascript:;">
             <i class="icon-home"></i>
-            <span class="title">系统设置</span>
+            <span class="title">报告设置</span>
             <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
                 <li>
-                    <a href="index_2.html">
+                    <a href="#">
                     <i class="icon-bulb"></i>
-                    New Dashboard #1</a>
+                    问卷调查设置</a>
                 </li>
                 <li>
-                    <a href="index_3.html">
+                    <a href="#">
                     <i class="icon-graph"></i>
-                    New Dashboard #2</a>
+                    试卷分析设置</a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="icon-briefcase"></i>
+                    教师建议设置</a>
                 </li>
             </ul>
         </li>

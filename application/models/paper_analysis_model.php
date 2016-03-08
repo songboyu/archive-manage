@@ -43,11 +43,11 @@ class paper_analysis_model extends CI_Model
         return $data;
     }
 
-    function get_all($pat_id)
+    function get_all($SID, $pat_id)
     {   
         $all = array();
         $titles = $this->get_titles();
-        $selects = $this->get_selects($pat_id);
+        $selects = $this->get_selects($SID, $pat_id);
         foreach ($titles as $title) {
             $answers = $this->get_answers_by_title_id($title['title_id']);
             $answer_with_select = array();
@@ -67,10 +67,14 @@ class paper_analysis_model extends CI_Model
         return $all;
     }
 
-    function get_selects($pat_id)
+    function get_selects($SID, $pat_id)
     {
-        $query = $this->db->where('pat_id',$pat_id);
-        $result = $query->get('paper_analysis')->result_array();
+        $this->db->where('SID',$SID);
+        $this->db->where('pat_id',$pat_id);
+        $query = $this->db->get('paper_analysis');
+        $result = $query->result_array();
+        // echo json_encode($result);
+
         $selects = array();
         foreach ($result as $select) {
             array_push($selects, $select['answer_id']);
@@ -78,33 +82,81 @@ class paper_analysis_model extends CI_Model
         return $selects;
     }
 
-    function submit($SID, $select, $update_time)
+    function submit($SID, $pat_id, $select, $update_time)
     {
         $this->db->where('SID',$SID);
-        $this->db->delete('questionnaire');
+        $this->db->where('pat_id',$pat_id);
+        $this->db->delete('paper_analysis');
 
         foreach ($select as $key => $value) {
             $data = array(
                 'SID'=>$SID,
+                'pat_id'=>$pat_id,
                 'title_id'=>$key,
                 'answer_id'=>$value,
                 'update_time'=>$update_time,
             );
-            $this->db->insert('questionnaire', $data);
+            $this->db->insert('paper_analysis', $data);
         }
-        $title_count = $this->db->count_all('questionnaire_title');
+        $title_count = $this->db->count_all('paper_analysis_title');
 
         $this->db->where('SID',$SID);
-        $query = $this->db->get('questionnaire');
+        $this->db->where('pat_id',$pat_id);
+        $query = $this->db->get('paper_analysis');
         $select_count = $query->num_rows();
+
         if($title_count == $select_count){
             $this->db->where('SID',$SID);
-            $this->db->update('archive', array('questionnaire_compelete'=>2));
+            $this->db->where('pat_id',$pat_id);
+            $this->db->update('paper_analysis_transaction', array('analysis_complete'=>2));
+            return 2;
 
         }else{
             $this->db->where('SID',$SID);
-            $this->db->update('archive', array('questionnaire_compelete'=>1));
+            $this->db->where('pat_id',$pat_id);
+            $this->db->update('paper_analysis_transaction', array('analysis_complete'=>1));
+            return 1;
         }
+    }
+
+    function add_paper_analysis_transaction($SID, $rows)
+    {
+        $this->db->where('SID',$SID);
+        $this->db->delete('paper_analysis_transaction');
+
+        $analysis_complete_all = true;
+        foreach ($rows as $row) {
+            if($row->analysis_complete != '2'){
+                $analysis_complete_all = false;
+            }
+            $data = array(
+                'SID'=>$SID,
+                'pat_id'=>$row->pat_id,
+                'subject'=>$row->subject,
+                'score_1'=>$row->score_1,
+                'score_2'=>$row->score_2,
+                'score_3'=>$row->score_3,
+                'analysis_complete'=>$row->analysis_complete
+            );
+            $this->db->insert('paper_analysis_transaction', $data);
+        }
+        if($analysis_complete_all == true){
+            $this->db->where('SID',$SID);
+            $this->db->update('archive', array('paper_analysis_complete'=>2));
+
+        }else{
+            $this->db->where('SID',$SID);
+            $this->db->update('archive', array('paper_analysis_complete'=>1));
+        }
+        return 1;
+    }
+
+    function get_paper_analysis_by_sid($SID)
+    {
+        $this->db->where('SID',$SID);
+        $query = $this->db->get('paper_analysis_transaction');
+        $result = $query->result_array();
+        return $result;
     }
 
     function compute_score($SID)

@@ -22,6 +22,7 @@ class questionnaire extends CI_Controller
         parent::__construct();
         $this->load->helper('common_helper');//公共函数
         $this->load->model('questionnaire_model');
+        $this->load->model('archive_model');
     }
 
     /**
@@ -32,6 +33,8 @@ class questionnaire extends CI_Controller
     {
         $SID = $this->uri->segment(3);
         $result['data'] = $this->questionnaire_model->get_all($SID);
+        $result['profile'] = $this->archive_model->get_archive_by_sid($SID)[0];
+        // echo json_encode($result['profile']);
         $result['SID'] = $SID;
         shuffle($result['data']);
         $this->load->view('questionnaire/questionnaire', $result);
@@ -39,12 +42,12 @@ class questionnaire extends CI_Controller
 
     function submit()
     {
-        $SID = get_post('SID');
+        $SID = $_POST['SID'];
         $update_time = date('Y-m-d H:i:s', time());
-        $select = get_post('select');
+        $select = $_POST['select'];
 
-        $this->questionnaire_model->submit($SID, $select, $update_time);
-        echo '提交成功！';
+        $result = $this->questionnaire_model->submit($SID, $select, $update_time);
+        echo $result;
     }
 
     function compute_score()

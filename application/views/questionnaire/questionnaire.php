@@ -13,6 +13,11 @@
 	    <div id="message">
 	      <p>问卷调查表</p>
 	    </div>
+	    <br>
+	    
+	    <div id="message" style="padding:1px;background:#335279;font-size:12px">
+	      <p><?php echo $profile['SID'].' '.$profile['name'].' '.$profile['school'].' '.$profile['grade'].' '.$profile['student_type']; ?></p>
+	    </div>
 	 
 	    <br><br>
 <?php 
@@ -52,8 +57,10 @@ $().ready(function() {
 			},
 			url:"<?php echo base_url('questionnaire/submit');?>",
 			success:function(data){
-				alert(data);
-				window.close();
+				if(data==1){
+					alert("提交成功！");
+					window.close();
+				}
 			}
 		});
 	});

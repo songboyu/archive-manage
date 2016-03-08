@@ -99,12 +99,13 @@ class questionnaire_model extends CI_Model
         $select_count = $query->num_rows();
         if($title_count == $select_count){
             $this->db->where('SID',$SID);
-            $this->db->update('archive', array('questionnaire_compelete'=>2));
+            $this->db->update('archive', array('questionnaire_complete'=>2));
 
         }else{
             $this->db->where('SID',$SID);
-            $this->db->update('archive', array('questionnaire_compelete'=>1));
+            $this->db->update('archive', array('questionnaire_complete'=>1));
         }
+        return 1;
     }
 
     function compute_score($SID)

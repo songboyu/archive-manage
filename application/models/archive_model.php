@@ -54,7 +54,7 @@ class archive_model extends CI_Model
         //获取符合条件的数据条数
         $result['display_records'] = $this->db->count_all_results('archive');
 
-        $this->db->select('SID,name,sex,school,grade,student_type,consult_date,questionnaire_compelete,paper_analysis_compelete');
+        $this->db->select('SID,name,sex,school,grade,student_type,consult_date,questionnaire_complete,paper_analysis_complete');
         $data = $this->db->get('archive', $count, $offset)->result_array();
         $result['result_array'] = $data;
         return $result;

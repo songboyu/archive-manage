@@ -39,8 +39,8 @@ CREATE TABLE `archive` (
   `bad_subject` varchar(10) DEFAULT NULL,
   `interest` varchar(255) DEFAULT NULL,
   `remediation_experience` varchar(10) DEFAULT NULL,
-  `questionnaire_compelete` int(11) DEFAULT '0' COMMENT '问卷调查完成',
-  `paper_analysis_compelete` int(11) DEFAULT '0' COMMENT '试卷分析完成 0-未开始 1-未完成 2-已完成',
+  `questionnaire_complete` int(11) DEFAULT '0' COMMENT '问卷调查完成',
+  `paper_analysis_complete` int(11) DEFAULT '0' COMMENT '试卷分析完成 0-未开始 1-未完成 2-已完成',
   PRIMARY KEY (`SID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

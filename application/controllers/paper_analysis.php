@@ -22,6 +22,7 @@ class paper_analysis extends CI_Controller
         parent::__construct();
         $this->load->helper('common_helper');//公共函数
         $this->load->model('paper_analysis_model');
+        $this->load->model('archive_model');
     }
 
     /**
@@ -29,22 +30,50 @@ class paper_analysis extends CI_Controller
     * @return void
     */
     function index()
-    {
-        $pat_id = $this->uri->segment(3);
-        $result['data'] = $this->paper_analysis_model->get_all($pat_id);
+    {  
+        $SID = $this->uri->segment(3);
+        $pat_id = $_GET['pat_id'];
+
+        $result['SID'] = $SID; 
         $result['pat_id'] = $pat_id;
+
+        $result['profile'] = $this->archive_model->get_archive_by_sid($SID)[0];
+        $result['data'] = $this->paper_analysis_model->get_all($SID, $pat_id);
         // shuffle($result['data']);
+        // echo json_encode($result);
         $this->load->view('paper_analysis/paper_analysis', $result);
     }
 
     function submit()
     {
-        $SID = get_post('SID');
+        $SID = $_POST['SID'];
+        $pat_id = $_POST['pat_id'];
         $update_time = date('Y-m-d H:i:s', time());
-        $select = get_post('select');
+        $select = $_POST['select'];
+        
+        $result = $this->paper_analysis_model->submit($SID, $pat_id, $select, $update_time);
+        echo $result;
+    }
 
-        $this->paper_analysis_model->submit($SID, $select, $update_time);
-        echo '提交成功！';
+    function get_paper_analysis_by_sid()
+    {
+        $SID = $_POST['SID'];
+        $result['data'] = $this->paper_analysis_model->get_paper_analysis_by_sid($SID);
+        echo json_encode($result);
+    }
+
+    function add_paper_analysis_transaction()
+    {
+        $json_string = $_POST['data'];
+
+        $json_string = html_entity_decode($json_string);
+        $json_string = json_decode($json_string);
+
+        $SID = $json_string->SID;
+        $rows = $json_string->data;
+
+        $result = $this->paper_analysis_model->add_paper_analysis_transaction($SID, $rows);
+        echo 1;
     }
 
     function compute_score()

@@ -13,7 +13,10 @@
 	    <div id="message">
 	      <p>试卷分析表</p>
 	    </div>
-	 
+	 	<br>
+	    <div id="message" style="padding:1px;background:#335279;font-size:12px">
+	      <p><?php echo $profile['SID'].' '.$profile['name'].' '.$profile['school'].' '.$profile['grade'].' '.$profile['student_type']; ?></p>
+	    </div>
 	    <br><br>
 <?php 
 
@@ -40,6 +43,13 @@ $().ready(function() {
 	$('#submit').click(function(){
 		var data = {};
 		var SID = "<?php echo $SID;?>";
+		var pat_id = "<?php echo $pat_id;?>";
+		// console.log(SID+' '+pat_id);
+
+		var parent = window.parent.opener;
+		var paper_analysis_button = $('#subject_list div.row[dataid="'+pat_id+'"] #paper_analysis_button', parent.document);
+
+		console.log(paper_analysis_button);
 		var select = {};
 		$('input:radio:checked').each(function(){ 
 			select[this.name] = this.value; 
@@ -48,11 +58,22 @@ $().ready(function() {
 			type:'POST',
 			data:{
 				'SID':SID,
+				'pat_id':pat_id,
 				'select':select
 			},
-			url:"<?php echo base_url('questionnaire/submit');?>",
+			url:"<?php echo base_url('paper_analysis/submit');?>",
 			success:function(data){
-				alert(data);
+				alert("提交成功！");
+				if(data == '1'){
+					// console.log('未完成');
+					paper_analysis_button.val('未完成');
+      				paper_analysis_button.attr('class','btn red');
+      				paper_analysis_button.attr('dataid','1');
+				}else if(data == '2'){
+					paper_analysis_button.val('已完成');
+      				paper_analysis_button.attr('class','btn green');
+      				paper_analysis_button.attr('dataid','2');
+				}
 				window.close();
 			}
 		});

@@ -65,7 +65,7 @@ class archive extends CI_Controller
         }
 
         $output = array(
-            "sEcho" => intval(get_get('sEcho')),
+            "sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $result['total_records'],
             "iTotalDisplayRecords" => $result['display_records'],
             "aaData" => $result['result_array']

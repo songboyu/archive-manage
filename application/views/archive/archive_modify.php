@@ -1,6 +1,6 @@
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 <div class="modal fade" id="archive_modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width:800px">
+  <div class="modal-dialog" style="width:600px">
     <div class="modal-content">
       <!-- <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -18,12 +18,10 @@
                   <div class="form-group">
                     <label class="col-md-3 control-label">姓名</label>
                     <div class="col-md-9">
-                      <div class="input-inline">
-                        <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                          <div class="input-icon">
+                          <i class="fa fa-user"></i>
                           <input type="text" class="form-control" id='name'>
                         </div>
-                      </div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -38,8 +36,12 @@
                   <div class="form-group">
                     <label class="col-md-3 control-label">出生日期</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control" id='birthday'>
+                      <div class="input-icon">
+                      <i class="fa fa-calendar"></i>
+                      <input class="form-control date-picker" type="text" id='birthday' data-date-format="yyyy-mm-dd"
+                      value="1998-01-01" data-date="1998-01-01" data-date-viewmode="years"/>
                     </div>
+                  </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label">学校</label>
@@ -155,7 +157,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-actions">
+                <div class="form-actions" style='padding:10px 10px'>
                   <div class="row">
                     <div class="col-md-offset-4 col-md-6">
                       <button type="button" class="btn green-haze" id="submit_modify">保存</button>

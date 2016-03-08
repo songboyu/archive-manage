@@ -15,7 +15,8 @@
 	<link href="<?php echo base_url('rs/global/plugins/uniform/css/uniform.default.css');?>" rel="stylesheet" type="text/css" />
 	<link href="<?php echo base_url('rs/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css');?>" rel="stylesheet" type="text/css" />
 	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('rs/global/plugins/bootstrap-datepicker/css/datepicker.css');?>"/>
+    <!-- BEGIN PAGE LEVEL STYLES -->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('rs/global/plugins/select2/select2.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('rs/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('rs/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css');?>" />
@@ -51,6 +52,7 @@
     <script src="<?php echo base_url('rs/global/plugins/uniform/jquery.uniform.min.js');?>" type="text/javascript"></script>
     <script src="<?php echo base_url('rs/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js');?>" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
+    <script type="text/javascript" src="<?php echo base_url('rs/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js');?>"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script type="text/javascript" src="<?php echo base_url('rs/global/plugins/select2/select2.min.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('rs/global/plugins/datatables/media/js/jquery.dataTables.min.js');?>"></script>

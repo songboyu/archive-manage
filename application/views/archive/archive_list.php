@@ -1,4 +1,13 @@
-﻿<!-- END PAGE HEADER-->
+﻿<style>
+.form-group{
+	margin-bottom:4px;
+}
+.portlet{
+	margin-bottom:0px;
+}
+</style>
+
+<!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
 <div class='row' style='font-family:"Helvetica Neue",Helvetica,Arial,sans-serif'>
 	<div class='col-md-12'>
@@ -35,7 +44,7 @@
 							<th>问卷调查</th>
 							<th>试卷分析</th>
 							<th>操作</th>
-							<th>生成报告</th>
+							<th>报告</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -99,8 +108,8 @@
 				{ "data": "grade", 'className': 'td_text_align_center' },
 				{ "data": "student_type", 'className': 'td_text_align_center' },
 				{ "data": "consult_date", 'className': 'td_text_align_center' },
-				{ "data": "questionnaire_compelete", 'className': 'td_text_align_center'},
-				{ "data": "paper_analysis_compelete", 'className': 'td_text_align_center'},
+				{ "data": "questionnaire_complete", 'className': 'td_text_align_center'},
+				{ "data": "paper_analysis_complete", 'className': 'td_text_align_center'},
 				{ 'className': 'td_text_align_center'},
 				{ 'className': 'td_text_align_center'},
 			],
@@ -118,7 +127,7 @@
 				},
 				{
 					"targets": [7],
-					"data": "questionnaire_compelete",
+					"data": "questionnaire_complete",
 					"render": function(data, type, full){
 						if(data==0)
 							return '<span class="label label-sm label-warning">\
@@ -136,15 +145,20 @@
 				},
 				{
 					"targets": [8],
-					"data": "paper_analysis_compelete",
+					"data": "paper_analysis_complete",
 					"render": function(data, type, full){
 						if(data==0)
 							return '<span class="label label-sm label-warning">\
 									<a style="color:white" href="#paper_analysis_transaction" data-toggle="modal" onclick="paper_analysis_transaction(\''+ full.SID +'\');"> 未开始</a>\
 									</span>';
+						else if(data==1)
+							
+							return '<span class="label label-sm label-danger">\
+									<a style="color:white" href="#paper_analysis_transaction" data-toggle="modal" onclick="paper_analysis_transaction(\''+ full.SID +'\');"> 未完成</a>\
+									</span>';
 						else if(data==2)
 							
-							return '<span class="label label-sm label-warning">\
+							return '<span class="label label-sm label-success">\
 									<a style="color:white" href="#paper_analysis_transaction" data-toggle="modal" onclick="paper_analysis_transaction(\''+ full.SID +'\');"> 已完成</a>\
 									</span>';
 					}
@@ -164,7 +178,7 @@
 					'targets': [10],
 					'data': 'time',
 					'render': function(data, type, full) { // 返回自定义内容
-						if(full.questionnaire_compelete==2 && full.paper_analysis_compelete==2)
+						if(full.questionnaire_complete==2 && full.paper_analysis_complete==2)
 							return '<a target="_blank" href="'+ base_url + 'archive/detail/?SID=' + full.SID + '">生成报告</a>';
 						else
 							return '';
@@ -214,7 +228,24 @@
         });
 	}
 
-	function paper_analysis_transaction(){
-
+	function paper_analysis_transaction(SID){
+		current_pat_id = 1;
+		$('#paper_analysis_SID').html(SID);
+		$.post(base_url+'paper_analysis/get_paper_analysis_by_sid', {
+        	SID:SID
+        },
+        function(result){
+        	data = JSON.parse(result).data;
+        	// console.log(data);
+        	if(data.length == 0){
+        		$('#subject_list').empty();
+        		add_subject();
+        	}else{
+        		$('#subject_list').empty();
+	        	for(i in data){
+	        		add_subject(data[i]);
+	        	}
+        	}
+        });
 	}
 </script>

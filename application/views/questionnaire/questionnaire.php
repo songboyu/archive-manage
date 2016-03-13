@@ -8,7 +8,7 @@
 	<link href="<?php echo base_url('rs/css/styles.css');?>" rel='stylesheet'>
   </head>
 
-  <body style="background:url(../../rs/images/background.jpg);">
+  <body>
     <div class="container">
 	    <div id="message">
 	      <p>问卷调查表</p>

@@ -6,7 +6,7 @@
 	margin-bottom:0px;
 }
 </style>
-
+<script language="javascript" src="<?php echo base_url('rs/js/jquery.jqprint-0.3.js')?>"></script>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
 <div class='row' style='font-family:"Helvetica Neue",Helvetica,Arial,sans-serif'>
@@ -49,7 +49,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan='8'>数据获取中，请稍后...</td>
+							<td colspan='11'>数据获取中，请稍后...</td>
 						</tr>
 					</tbody>
 				</table>
@@ -179,7 +179,7 @@
 					'data': 'time',
 					'render': function(data, type, full) { // 返回自定义内容
 						if(full.questionnaire_complete==2 && full.paper_analysis_complete==2)
-							return '<a target="_blank" href="'+ base_url + 'archive/detail/?SID=' + full.SID + '">生成报告</a>';
+							return '<a href="#" onclick="print_report(\''+ full.SID +'\');"><i class="fa fa-print"></i> 打印报告</a>';
 						else
 							return '';
 					}
@@ -190,8 +190,7 @@
 		$("#archive_manage_table_wrapper").find(".dataTables_length select").select2(); 
 	}
 
-	function modify_archive(dataid) {	
-		var SID = dataid;
+	function modify_archive(SID) {
 		$.post(base_url+'archive/get_archive_by_sid', {
         	SID:SID
         },
@@ -216,10 +215,9 @@
         });
 	}
 
-	function delete_archive(dataid) {
+	function delete_archive(SID) {
 		if(confirm('确认删除？')!=true)
 			return false;
-		var SID = dataid;
 		$.post(base_url+'archive/delete_archive', {
         	SID:SID
         },
@@ -246,6 +244,21 @@
 	        		add_subject(data[i]);
 	        	}
         	}
+        });
+	}
+
+	function print_report(SID) {
+		$.get(base_url+'report/index', {
+        	SID:SID
+        },
+        function(result){
+        	var doc = $(result);
+        	doc.jqprint({
+        		debug: false, //如果是true则可以显示iframe查看效果（iframe默认高和宽都很小，可以再源码中调大），默认是false
+		    	importCSS: false, //true表示引进原来的页面的css，默认是true。（如果是true，先会找$("link[media=print]")，若没有会去找$("link")中的css文件）
+		    	printContainer: true, //表示如果原来选择的对象必须被纳入打印（注意：设置为false可能会打破你的CSS规则）。
+		    	operaSupport: true//表示如果插件也必须支持歌opera浏览器，在这种情况下，它提供了建立一个临时的打印选项卡。默认是true
+        	});
         });
 	}
 </script>

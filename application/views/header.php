@@ -5,8 +5,6 @@
 	<title>教育信息综合管理平台</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta name="keywords" content="blue tech, free template, web design" />
-	<meta name="description" content="Blue Tech is free website template by Metronic" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 	<!-- <link href="http://fonts.useso.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /> -->
 	<link href="<?php echo base_url('rs/global/plugins/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css" />

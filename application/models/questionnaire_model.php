@@ -117,8 +117,41 @@ where b.SID='".$SID."') aa
 join 
 (select answer_id,score from questionnaire_answer) bb
 on aa.answer_id = bb.answer_id
-group by aa.cid");
+group by aa.cid
+order by aa.cid");
+        $scores = $query->result_array();
+        
+        return $scores;
+    }
+
+    function get_result($SID)
+    {
+        $scores = $this->compute_score($SID);
+        $sdic = array();
+        foreach ($scores as $s) {
+            $sdic[$s['cid']] = $s['score'];
+        }
+        $final = array();
+        $query = $this->db->query("select a.title,b.* from questionnaire_category a
+join questionnaire_result b
+on a.cid=b.cid");
         $result = $query->result_array();
-        echo json_encode($result);
+        foreach ($result as $r) {
+            if($sdic[$r['cid']] >= $r['lower_score'] && $sdic[$r['cid']] <= $r['upper_score']){
+                $r['score'] = $sdic[$r['cid']];
+                array_push($final, $r);
+            }
+        }
+        return $final;
+    }
+
+    function get_max_scores(){
+        $query = $this->db->query("select a.cid,a.title,max(b.upper_score) as max from questionnaire_category a
+join questionnaire_result b
+on a.cid=b.cid
+group by a.cid,a.title");
+        $maxs = $query->result_array();
+        
+        return $maxs;
     }
 }

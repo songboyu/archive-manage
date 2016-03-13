@@ -50,12 +50,6 @@ class questionnaire extends CI_Controller
         echo $result;
     }
 
-    function compute_score()
-    {
-        $SID = $this->uri->segment(3);
-        $this->questionnaire_model->compute_score($SID);
-    }
-
     function page()
     {
         $this->load->view('questionnaire/page');

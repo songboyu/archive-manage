@@ -23,7 +23,6 @@ class archive extends CI_Controller
         $this->load->helper('pageination_helper');//分页函数
         $this->load->helper('common_helper');//公共函数
         $this->load->model('archive_model');//M层的数据库读和写文件
-        $this->load->database();
     }
 
     /**

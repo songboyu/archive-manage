@@ -2,6 +2,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<script src="<?php echo base_url('rs/global/plugins/jquery-1.11.0.min.js');?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('rs/js/jquery.jqprint-0.3.js')?>"></script>
 	<script src="<?php echo base_url('rs/js/echarts.min.js');?>" type="text/javascript"></script>
 	<link href="<?php echo base_url('rs/css/styles.css');?>" rel='stylesheet'>
 </head>
@@ -48,39 +49,7 @@ p {
 	padding:0px 2%;
 }
 </style>
-<script>
-$().ready(function() {
-	var myChart = echarts.init(document.getElementById('qresult'));
-	option = {
-	    tooltip: {},
-	    legend: {
-	        // data: ['能力分配']
-	    },
-	    radar: {
-	        // shape: 'circle',
-	        indicator: [
-	        <?php foreach ($maxs as $max) {
-	        	echo "{ name: '".substr($max['title'],6)."', max: ".($max['max'])."},";
-	        }?>
-	        ]
-	    },
-	    series: [{
-	        name: '预算 vs 开销（Budget vs spending）',
-	        type: 'radar',
-	        // areaStyle: {normal: {}},
-	        data : [
-	             {
-	                value : [<?php foreach ($qresult as $r) {
-	                	echo ($r['score']).',';
-	                }?>],
-	                name : '能力分配'
-	            }
-	        ]
-	    }]
-	};
-	myChart.setOption(option);
-});
-</script>
+
 <body>
 	<div class="container">
 		<div class="head" style="font-size:20px">学生综合测评报告</div>
@@ -118,6 +87,7 @@ $().ready(function() {
 	    </table>
 	 	<hr>
 	    <br><br>
+
 	    <div class="head">问卷评测</div>
 	    <br>
 	    <div class="inline_container">
@@ -132,6 +102,43 @@ $().ready(function() {
 		    <br>
 		    <?php } ?>
 		</div>
+
+		<div  style="page-break-before:always;"><br /></div>
 	<div>
+	<button onclick="window.print()">打印</button>
 <body>
+
+<script>
+$().ready(function() {
+	var myChart = echarts.init(document.getElementById('qresult'));
+	option = {
+	    tooltip: {},
+	    legend: {
+	        // data: ['能力分配']
+	    },
+	    radar: {
+	        // shape: 'circle',
+	        indicator: [
+	        <?php foreach ($maxs as $max) {
+	        	echo "{ name: '".substr($max['title'],6)."', max: ".($max['max'])."},";
+	        }?>
+	        ]
+	    },
+	    series: [{
+	        name: '预算 vs 开销（Budget vs spending）',
+	        type: 'radar',
+	        // areaStyle: {normal: {}},
+	        data : [
+	             {
+	                value : [<?php foreach ($qresult as $r) {
+	                	echo ($r['score']).',';
+	                }?>],
+	                name : '能力分配'
+	            }
+	        ]
+	    }]
+	};
+	myChart.setOption(option);
+});
+</script>
 </html>

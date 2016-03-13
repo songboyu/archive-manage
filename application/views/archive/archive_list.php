@@ -179,7 +179,9 @@
 					'data': 'time',
 					'render': function(data, type, full) { // 返回自定义内容
 						if(full.questionnaire_complete==2 && full.paper_analysis_complete==2)
-							return '<a href="#" onclick="print_report(\''+ full.SID +'\');"><i class="fa fa-print"></i> 打印报告</a>';
+							return '<a target="_blank" href="'+ base_url + 'report/index/?SID=' + full.SID + '"><i class="fa fa-file-text-o"></i> 查看</a>\
+									&nbsp;\
+									<a href="#" onclick="print_report(\''+ full.SID +'\');"><i class="fa fa-print"></i> 打印</a>';
 						else
 							return '';
 					}
